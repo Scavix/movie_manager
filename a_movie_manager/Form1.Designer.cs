@@ -28,12 +28,82 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "Form1";
+            listView = new ListView();
+            addButton = new Button();
+            EditButton = new Button();
+            deleteButton = new Button();
+            viewButton = new Button();
+            SuspendLayout();
+            // 
+            // listView
+            // 
+            listView.Location = new Point(12, 12);
+            listView.Name = "listView";
+            listView.Size = new Size(319, 201);
+            listView.TabIndex = 0;
+            listView.UseCompatibleStateImageBehavior = false;
+            // 
+            // addButton
+            // 
+            addButton.Location = new Point(12, 219);
+            addButton.Name = "addButton";
+            addButton.Size = new Size(75, 23);
+            addButton.TabIndex = 1;
+            addButton.Text = "Add";
+            addButton.UseVisualStyleBackColor = true;
+            addButton.Click += addButton_Click;
+            // 
+            // EditButton
+            // 
+            EditButton.Location = new Point(93, 219);
+            EditButton.Name = "EditButton";
+            EditButton.Size = new Size(75, 23);
+            EditButton.TabIndex = 2;
+            EditButton.Text = "Edit";
+            EditButton.UseVisualStyleBackColor = true;
+            EditButton.Click += EditButton_Click;
+            // 
+            // deleteButton
+            // 
+            deleteButton.Location = new Point(175, 219);
+            deleteButton.Name = "deleteButton";
+            deleteButton.Size = new Size(75, 23);
+            deleteButton.TabIndex = 3;
+            deleteButton.Text = "Delete";
+            deleteButton.UseVisualStyleBackColor = true;
+            deleteButton.Click += deleteButton_Click;
+            // 
+            // viewButton
+            // 
+            viewButton.Location = new Point(256, 219);
+            viewButton.Name = "viewButton";
+            viewButton.Size = new Size(75, 23);
+            viewButton.TabIndex = 4;
+            viewButton.Text = "View";
+            viewButton.UseVisualStyleBackColor = true;
+            viewButton.Click += viewButton_Click;
+            // 
+            // Form1
+            // 
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(343, 254);
+            Controls.Add(viewButton);
+            Controls.Add(deleteButton);
+            Controls.Add(EditButton);
+            Controls.Add(addButton);
+            Controls.Add(listView);
+            Name = "Form1";
+            Text = "Movie Manager";
+            ResumeLayout(false);
         }
 
         #endregion
+
+        private ListView listView;
+        private Button addButton;
+        private Button EditButton;
+        private Button deleteButton;
+        private Button viewButton;
     }
 }
