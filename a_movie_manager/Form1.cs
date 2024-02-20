@@ -1,3 +1,5 @@
+using Microsoft.VisualBasic.FileIO;
+using System.Text.Json;
 using System.Windows.Forms;
 using static System.Windows.Forms.DataFormats;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
@@ -77,7 +79,7 @@ namespace a_movie_manager
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
                 openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-                openFileDialog.Filter = "JSON files (*.json)|*.json|XML files (*.xml)|*.xml|CSV files (*.csv)|*.csv|Database files (*.db)|*.db|Excel files (*.xlsx)|*.xlsx|Data files (*.dat)|*.dat";
+                openFileDialog.Filter = "JSON files (*.json)|*.json|XML files (*.xml)|*.xml|CSV files (*.csv)|*.csv|Database files (*.db)|*.db|Data files (*.dat)|*.dat";
                 openFileDialog.RestoreDirectory = true;
 
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
@@ -94,11 +96,49 @@ namespace a_movie_manager
                     }
                 }
             }
-            if ()
+            if (filePath.EndsWith(".json"))
+            {
+                Movie m = new();
+                JsonDocument jsonDoc = JsonDocument.Parse(fileContent);
+                JsonElement root = jsonDoc.RootElement;
+                m.Title = root.GetProperty("Title").ToString();
+                m.Description = root.GetProperty("Description").ToString();
+                m.Duration = int.Parse(root.GetProperty("Duration").ToString());
+                m.Drive = char.Parse(root.GetProperty("Drive").ToString());
+                m.Year = int.Parse(root.GetProperty("Year").ToString());
+                m.Directors = root.GetProperty("Directors").ToString().Split(",").ToList();
+            }
+            else if (filePath.EndsWith(".xml"))
+            {
+                Movie m = new();
+
+            }
+            else if (filePath.EndsWith(".csv"))
+            {
+                Movie m = new();
+                using (TextFieldParser parser = new TextFieldParser(new StringReader(fileContent)))
+                {
+                    parser.TextFieldType = FieldType.Delimited;
+                    parser.SetDelimiters(",");
+                    while (!parser.EndOfData)
+                    {
+                        string[] fields = parser.ReadFields();
+                        foreach (string field in fields)
+                        {
+                            MessageBox.Show(field);
+                        }
+                    }
+                }
+            }
+            else if (filePath.EndsWith(".db"))
             {
 
             }
-            MessageBox.Show(fileContent, "File Content at path: " + filePath, MessageBoxButtons.OK);
+            else if (filePath.EndsWith(".dat"))
+            {
+
+            }
+            //MessageBox.Show(fileContent, "File Content at path: " + filePath, MessageBoxButtons.OK);
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
