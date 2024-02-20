@@ -7,6 +7,8 @@ namespace a_movie_manager
     public partial class Form1 : Form
     {
         MovieManager mm = new();
+        string fileContent = string.Empty;
+        string filePath = string.Empty;
         public Form1()
         {
             InitializeComponent();
@@ -50,13 +52,58 @@ namespace a_movie_manager
         private void updateListView()
         {
             listView.Items.Clear();
-            for (int i = 0;i< mm.GetMovies().Count; i++)
+            for (int i = 0; i < mm.GetMovies().Count; i++)
             {
                 ListViewItem lvi = new(mm.GetMovie(i).Title);
                 lvi.SubItems.Add(mm.GetMovie(i).Year.ToString());
                 lvi.SubItems.Add(mm.GetMovie(i).Drive.ToString());
                 listView.Items.Add(lvi);
             }
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AboutBox1 aboutBox1 = new();
+            aboutBox1.ShowDialog();
+        }
+
+        private void newToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            mm.Clear();
+            updateListView();
+        }
+        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+                openFileDialog.Filter = "JSON files (*.json)|*.json|XML files (*.xml)|*.xml|CSV files (*.csv)|*.csv|Database files (*.db)|*.db|Excel files (*.xlsx)|*.xlsx|Data files (*.dat)|*.dat";
+                openFileDialog.RestoreDirectory = true;
+
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    //Get the path of specified file
+                    filePath = openFileDialog.FileName;
+
+                    //Read the contents of the file into a stream
+                    var fileStream = openFileDialog.OpenFile();
+
+                    using (StreamReader reader = new StreamReader(fileStream))
+                    {
+                        fileContent = reader.ReadToEnd();
+                    }
+                }
+            }
+            if ()
+            {
+
+            }
+            MessageBox.Show(fileContent, "File Content at path: " + filePath, MessageBoxButtons.OK);
+        }
+
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

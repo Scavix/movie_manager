@@ -39,8 +39,20 @@
             menuStrip1 = new MenuStrip();
             fileToolStripMenuItem = new ToolStripMenuItem();
             newToolStripMenuItem = new ToolStripMenuItem();
-            saveAsToolStripMenuItem = new ToolStripMenuItem();
             openToolStripMenuItem = new ToolStripMenuItem();
+            saveToolStripMenuItem = new ToolStripMenuItem();
+            saveAsToolStripMenuItem1 = new ToolStripMenuItem();
+            toolsToolStripMenuItem = new ToolStripMenuItem();
+            scanAndAppendToolStripMenuItem = new ToolStripMenuItem();
+            helpToolStripMenuItem = new ToolStripMenuItem();
+            aboutToolStripMenuItem = new ToolStripMenuItem();
+            txtToolStripMenuItem = new ToolStripMenuItem();
+            jsonToolStripMenuItem = new ToolStripMenuItem();
+            xmlToolStripMenuItem = new ToolStripMenuItem();
+            csvToolStripMenuItem = new ToolStripMenuItem();
+            dbToolStripMenuItem = new ToolStripMenuItem();
+            xlsxToolStripMenuItem = new ToolStripMenuItem();
+            datToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -112,7 +124,7 @@
             // menuStrip1
             // 
             menuStrip1.BackColor = SystemColors.ActiveBorder;
-            menuStrip1.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem, toolsToolStripMenuItem, helpToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Size = new Size(343, 24);
@@ -121,28 +133,107 @@
             // 
             // fileToolStripMenuItem
             // 
-            fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { newToolStripMenuItem, saveAsToolStripMenuItem, openToolStripMenuItem });
+            fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { newToolStripMenuItem, openToolStripMenuItem, saveToolStripMenuItem, saveAsToolStripMenuItem1 });
             fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            fileToolStripMenuItem.Size = new Size(37, 20);
-            fileToolStripMenuItem.Text = "File";
+            fileToolStripMenuItem.Size = new Size(59, 20);
+            fileToolStripMenuItem.Text = "Archive";
             // 
             // newToolStripMenuItem
             // 
             newToolStripMenuItem.Name = "newToolStripMenuItem";
-            newToolStripMenuItem.Size = new Size(112, 22);
+            newToolStripMenuItem.Size = new Size(180, 22);
             newToolStripMenuItem.Text = "New";
-            // 
-            // saveAsToolStripMenuItem
-            // 
-            saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            saveAsToolStripMenuItem.Size = new Size(112, 22);
-            saveAsToolStripMenuItem.Text = "Save as";
+            newToolStripMenuItem.Click += newToolStripMenuItem_Click;
             // 
             // openToolStripMenuItem
             // 
             openToolStripMenuItem.Name = "openToolStripMenuItem";
-            openToolStripMenuItem.Size = new Size(112, 22);
+            openToolStripMenuItem.Size = new Size(180, 22);
             openToolStripMenuItem.Text = "Open";
+            openToolStripMenuItem.Click += openToolStripMenuItem_Click;
+            // 
+            // saveToolStripMenuItem
+            // 
+            saveToolStripMenuItem.Name = "saveToolStripMenuItem";
+            saveToolStripMenuItem.Size = new Size(180, 22);
+            saveToolStripMenuItem.Text = "Save";
+            saveToolStripMenuItem.Click += saveToolStripMenuItem_Click;
+            // 
+            // saveAsToolStripMenuItem1
+            // 
+            saveAsToolStripMenuItem1.DropDownItems.AddRange(new ToolStripItem[] { txtToolStripMenuItem, jsonToolStripMenuItem, xmlToolStripMenuItem, csvToolStripMenuItem, dbToolStripMenuItem, xlsxToolStripMenuItem, datToolStripMenuItem });
+            saveAsToolStripMenuItem1.Name = "saveAsToolStripMenuItem1";
+            saveAsToolStripMenuItem1.Size = new Size(180, 22);
+            saveAsToolStripMenuItem1.Text = "Save as";
+            // 
+            // toolsToolStripMenuItem
+            // 
+            toolsToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { scanAndAppendToolStripMenuItem });
+            toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
+            toolsToolStripMenuItem.Size = new Size(46, 20);
+            toolsToolStripMenuItem.Text = "Tools";
+            // 
+            // scanAndAppendToolStripMenuItem
+            // 
+            scanAndAppendToolStripMenuItem.Name = "scanAndAppendToolStripMenuItem";
+            scanAndAppendToolStripMenuItem.Size = new Size(167, 22);
+            scanAndAppendToolStripMenuItem.Text = "Scan and Append";
+            // 
+            // helpToolStripMenuItem
+            // 
+            helpToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { aboutToolStripMenuItem });
+            helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            helpToolStripMenuItem.Size = new Size(44, 20);
+            helpToolStripMenuItem.Text = "Help";
+            // 
+            // aboutToolStripMenuItem
+            // 
+            aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            aboutToolStripMenuItem.Size = new Size(107, 22);
+            aboutToolStripMenuItem.Text = "About";
+            aboutToolStripMenuItem.Click += aboutToolStripMenuItem_Click;
+            // 
+            // txtToolStripMenuItem
+            // 
+            txtToolStripMenuItem.Name = "txtToolStripMenuItem";
+            txtToolStripMenuItem.Size = new Size(180, 22);
+            txtToolStripMenuItem.Text = ".txt";
+            // 
+            // jsonToolStripMenuItem
+            // 
+            jsonToolStripMenuItem.Name = "jsonToolStripMenuItem";
+            jsonToolStripMenuItem.Size = new Size(180, 22);
+            jsonToolStripMenuItem.Text = ".json";
+            // 
+            // xmlToolStripMenuItem
+            // 
+            xmlToolStripMenuItem.Name = "xmlToolStripMenuItem";
+            xmlToolStripMenuItem.Size = new Size(180, 22);
+            xmlToolStripMenuItem.Text = ".xml";
+            // 
+            // csvToolStripMenuItem
+            // 
+            csvToolStripMenuItem.Name = "csvToolStripMenuItem";
+            csvToolStripMenuItem.Size = new Size(180, 22);
+            csvToolStripMenuItem.Text = ".csv";
+            // 
+            // dbToolStripMenuItem
+            // 
+            dbToolStripMenuItem.Name = "dbToolStripMenuItem";
+            dbToolStripMenuItem.Size = new Size(180, 22);
+            dbToolStripMenuItem.Text = ".db";
+            // 
+            // xlsxToolStripMenuItem
+            // 
+            xlsxToolStripMenuItem.Name = "xlsxToolStripMenuItem";
+            xlsxToolStripMenuItem.Size = new Size(180, 22);
+            xlsxToolStripMenuItem.Text = ".xlsx";
+            // 
+            // datToolStripMenuItem
+            // 
+            datToolStripMenuItem.Name = "datToolStripMenuItem";
+            datToolStripMenuItem.Size = new Size(180, 22);
+            datToolStripMenuItem.Text = ".dat";
             // 
             // Form1
             // 
@@ -176,7 +267,19 @@
         private MenuStrip menuStrip1;
         private ToolStripMenuItem fileToolStripMenuItem;
         private ToolStripMenuItem newToolStripMenuItem;
-        private ToolStripMenuItem saveAsToolStripMenuItem;
         private ToolStripMenuItem openToolStripMenuItem;
+        private ToolStripMenuItem saveToolStripMenuItem;
+        private ToolStripMenuItem toolsToolStripMenuItem;
+        private ToolStripMenuItem scanAndAppendToolStripMenuItem;
+        private ToolStripMenuItem helpToolStripMenuItem;
+        private ToolStripMenuItem aboutToolStripMenuItem;
+        private ToolStripMenuItem saveAsToolStripMenuItem1;
+        private ToolStripMenuItem txtToolStripMenuItem;
+        private ToolStripMenuItem jsonToolStripMenuItem;
+        private ToolStripMenuItem xmlToolStripMenuItem;
+        private ToolStripMenuItem csvToolStripMenuItem;
+        private ToolStripMenuItem dbToolStripMenuItem;
+        private ToolStripMenuItem xlsxToolStripMenuItem;
+        private ToolStripMenuItem datToolStripMenuItem;
     }
 }
