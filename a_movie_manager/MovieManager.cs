@@ -25,6 +25,10 @@ namespace a_movie_manager
         {
             Movies.Remove(movie);
         }
+        public void RemoveMovieAt(int id)
+        {
+            Movies.RemoveAt(id);
+        }
         public void Clear()
         {
             Movies.Clear();

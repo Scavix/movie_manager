@@ -1,4 +1,5 @@
 using System.Windows.Forms;
+using static System.Windows.Forms.DataFormats;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace a_movie_manager
@@ -36,12 +37,14 @@ namespace a_movie_manager
 
         private void deleteButton_Click(object sender, EventArgs e)
         {
-
+            mm.RemoveMovieAt(listView.SelectedIndices[0]);
+            updateListView();
         }
 
         private void viewButton_Click(object sender, EventArgs e)
         {
-
+            Form3 form3 = new(mm.GetMovie(listView.SelectedIndices[0]));
+            form3.ShowDialog();
         }
 
         private void updateListView()

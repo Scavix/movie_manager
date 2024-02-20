@@ -56,9 +56,9 @@
             label1.AutoSize = true;
             label1.Location = new Point(12, 15);
             label1.Name = "label1";
-            label1.Size = new Size(103, 15);
+            label1.Size = new Size(93, 15);
             label1.TabIndex = 1;
-            label1.Text = "Enter movie name";
+            label1.Text = "Enter movie title";
             // 
             // directorsTextBox
             // 
