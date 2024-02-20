@@ -32,5 +32,9 @@ namespace a_movie_manager
         public List<Movie> GetMovies() {
             return Movies;
         }
+        public Movie GetMovie(int id)
+        {
+            return Movies[id];
+        }
     }
 }

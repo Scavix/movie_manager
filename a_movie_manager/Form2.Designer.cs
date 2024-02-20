@@ -40,6 +40,8 @@
             label5 = new Label();
             okButton = new Button();
             cancelButton = new Button();
+            yearTextBox = new TextBox();
+            label6 = new Label();
             SuspendLayout();
             // 
             // titleTextBox
@@ -108,7 +110,7 @@
             // 
             // descriptionRichTextBox
             // 
-            descriptionRichTextBox.Location = new Point(12, 149);
+            descriptionRichTextBox.Location = new Point(12, 178);
             descriptionRichTextBox.Name = "descriptionRichTextBox";
             descriptionRichTextBox.Size = new Size(239, 96);
             descriptionRichTextBox.TabIndex = 8;
@@ -117,7 +119,7 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(12, 131);
+            label5.Location = new Point(12, 160);
             label5.Name = "label5";
             label5.Size = new Size(132, 15);
             label5.TabIndex = 10;
@@ -126,7 +128,7 @@
             // okButton
             // 
             okButton.DialogResult = DialogResult.OK;
-            okButton.Location = new Point(12, 251);
+            okButton.Location = new Point(12, 280);
             okButton.Name = "okButton";
             okButton.Size = new Size(75, 23);
             okButton.TabIndex = 11;
@@ -137,18 +139,36 @@
             // cancelButton
             // 
             cancelButton.DialogResult = DialogResult.Cancel;
-            cancelButton.Location = new Point(176, 251);
+            cancelButton.Location = new Point(176, 280);
             cancelButton.Name = "cancelButton";
             cancelButton.Size = new Size(75, 23);
             cancelButton.TabIndex = 12;
             cancelButton.Text = "Cancel";
             cancelButton.UseVisualStyleBackColor = true;
             // 
+            // yearTextBox
+            // 
+            yearTextBox.Location = new Point(154, 128);
+            yearTextBox.Name = "yearTextBox";
+            yearTextBox.Size = new Size(100, 23);
+            yearTextBox.TabIndex = 13;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Location = new Point(12, 131);
+            label6.Name = "label6";
+            label6.Size = new Size(95, 15);
+            label6.TabIndex = 14;
+            label6.Text = "Enter movie year";
+            // 
             // Form2
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(263, 284);
+            ClientSize = new Size(263, 310);
+            Controls.Add(label6);
+            Controls.Add(yearTextBox);
             Controls.Add(cancelButton);
             Controls.Add(okButton);
             Controls.Add(label5);
@@ -181,5 +201,7 @@
         private Label label5;
         private Button okButton;
         private Button cancelButton;
+        private TextBox yearTextBox;
+        private Label label6;
     }
 }
