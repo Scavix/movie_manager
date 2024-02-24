@@ -36,23 +36,20 @@
             titleColumnHeader = new ColumnHeader();
             yearColumnHeader = new ColumnHeader();
             durationColumnHeader = new ColumnHeader();
+            driveColumnHeader = new ColumnHeader();
             menuStrip1 = new MenuStrip();
             fileToolStripMenuItem = new ToolStripMenuItem();
             newToolStripMenuItem = new ToolStripMenuItem();
             openToolStripMenuItem = new ToolStripMenuItem();
-            saveToolStripMenuItem = new ToolStripMenuItem();
             saveAsToolStripMenuItem1 = new ToolStripMenuItem();
-            toolsToolStripMenuItem = new ToolStripMenuItem();
-            scanAndAppendToolStripMenuItem = new ToolStripMenuItem();
-            helpToolStripMenuItem = new ToolStripMenuItem();
-            aboutToolStripMenuItem = new ToolStripMenuItem();
             txtToolStripMenuItem = new ToolStripMenuItem();
             jsonToolStripMenuItem = new ToolStripMenuItem();
             xmlToolStripMenuItem = new ToolStripMenuItem();
             csvToolStripMenuItem = new ToolStripMenuItem();
-            dbToolStripMenuItem = new ToolStripMenuItem();
-            xlsxToolStripMenuItem = new ToolStripMenuItem();
-            datToolStripMenuItem = new ToolStripMenuItem();
+            toolsToolStripMenuItem = new ToolStripMenuItem();
+            scanAndAppendToolStripMenuItem = new ToolStripMenuItem();
+            helpToolStripMenuItem = new ToolStripMenuItem();
+            aboutToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -98,7 +95,7 @@
             // 
             // listView
             // 
-            listView.Columns.AddRange(new ColumnHeader[] { titleColumnHeader, yearColumnHeader, durationColumnHeader });
+            listView.Columns.AddRange(new ColumnHeader[] { titleColumnHeader, yearColumnHeader, durationColumnHeader, driveColumnHeader });
             listView.Location = new Point(11, 27);
             listView.Name = "listView";
             listView.Size = new Size(319, 201);
@@ -109,17 +106,21 @@
             // titleColumnHeader
             // 
             titleColumnHeader.Text = "Title";
-            titleColumnHeader.Width = 150;
+            titleColumnHeader.Width = 170;
             // 
             // yearColumnHeader
             // 
             yearColumnHeader.Text = "Year";
-            yearColumnHeader.Width = 80;
+            yearColumnHeader.Width = 40;
             // 
             // durationColumnHeader
             // 
             durationColumnHeader.Text = "Duration";
-            durationColumnHeader.Width = 80;
+            // 
+            // driveColumnHeader
+            // 
+            driveColumnHeader.Text = "Drive";
+            driveColumnHeader.Width = 40;
             // 
             // menuStrip1
             // 
@@ -133,7 +134,7 @@
             // 
             // fileToolStripMenuItem
             // 
-            fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { newToolStripMenuItem, openToolStripMenuItem, saveToolStripMenuItem, saveAsToolStripMenuItem1 });
+            fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { newToolStripMenuItem, openToolStripMenuItem, saveAsToolStripMenuItem1 });
             fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             fileToolStripMenuItem.Size = new Size(59, 20);
             fileToolStripMenuItem.Text = "Archive";
@@ -152,19 +153,40 @@
             openToolStripMenuItem.Text = "Open";
             openToolStripMenuItem.Click += openToolStripMenuItem_Click;
             // 
-            // saveToolStripMenuItem
-            // 
-            saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            saveToolStripMenuItem.Size = new Size(180, 22);
-            saveToolStripMenuItem.Text = "Save";
-            saveToolStripMenuItem.Click += saveToolStripMenuItem_Click;
-            // 
             // saveAsToolStripMenuItem1
             // 
-            saveAsToolStripMenuItem1.DropDownItems.AddRange(new ToolStripItem[] { txtToolStripMenuItem, jsonToolStripMenuItem, xmlToolStripMenuItem, csvToolStripMenuItem, dbToolStripMenuItem, xlsxToolStripMenuItem, datToolStripMenuItem });
+            saveAsToolStripMenuItem1.DropDownItems.AddRange(new ToolStripItem[] { txtToolStripMenuItem, jsonToolStripMenuItem, xmlToolStripMenuItem, csvToolStripMenuItem });
             saveAsToolStripMenuItem1.Name = "saveAsToolStripMenuItem1";
             saveAsToolStripMenuItem1.Size = new Size(180, 22);
             saveAsToolStripMenuItem1.Text = "Save as";
+            // 
+            // txtToolStripMenuItem
+            // 
+            txtToolStripMenuItem.Name = "txtToolStripMenuItem";
+            txtToolStripMenuItem.Size = new Size(180, 22);
+            txtToolStripMenuItem.Text = ".txt";
+            txtToolStripMenuItem.Click += txtToolStripMenuItem_Click;
+            // 
+            // jsonToolStripMenuItem
+            // 
+            jsonToolStripMenuItem.Name = "jsonToolStripMenuItem";
+            jsonToolStripMenuItem.Size = new Size(180, 22);
+            jsonToolStripMenuItem.Text = ".json";
+            jsonToolStripMenuItem.Click += jsonToolStripMenuItem_Click;
+            // 
+            // xmlToolStripMenuItem
+            // 
+            xmlToolStripMenuItem.Name = "xmlToolStripMenuItem";
+            xmlToolStripMenuItem.Size = new Size(180, 22);
+            xmlToolStripMenuItem.Text = ".xml";
+            xmlToolStripMenuItem.Click += xmlToolStripMenuItem_Click;
+            // 
+            // csvToolStripMenuItem
+            // 
+            csvToolStripMenuItem.Name = "csvToolStripMenuItem";
+            csvToolStripMenuItem.Size = new Size(180, 22);
+            csvToolStripMenuItem.Text = ".csv";
+            csvToolStripMenuItem.Click += csvToolStripMenuItem_Click;
             // 
             // toolsToolStripMenuItem
             // 
@@ -178,6 +200,7 @@
             scanAndAppendToolStripMenuItem.Name = "scanAndAppendToolStripMenuItem";
             scanAndAppendToolStripMenuItem.Size = new Size(167, 22);
             scanAndAppendToolStripMenuItem.Text = "Scan and Append";
+            scanAndAppendToolStripMenuItem.Click += scanAndAppendToolStripMenuItem_Click;
             // 
             // helpToolStripMenuItem
             // 
@@ -192,48 +215,6 @@
             aboutToolStripMenuItem.Size = new Size(107, 22);
             aboutToolStripMenuItem.Text = "About";
             aboutToolStripMenuItem.Click += aboutToolStripMenuItem_Click;
-            // 
-            // txtToolStripMenuItem
-            // 
-            txtToolStripMenuItem.Name = "txtToolStripMenuItem";
-            txtToolStripMenuItem.Size = new Size(180, 22);
-            txtToolStripMenuItem.Text = ".txt";
-            // 
-            // jsonToolStripMenuItem
-            // 
-            jsonToolStripMenuItem.Name = "jsonToolStripMenuItem";
-            jsonToolStripMenuItem.Size = new Size(180, 22);
-            jsonToolStripMenuItem.Text = ".json";
-            // 
-            // xmlToolStripMenuItem
-            // 
-            xmlToolStripMenuItem.Name = "xmlToolStripMenuItem";
-            xmlToolStripMenuItem.Size = new Size(180, 22);
-            xmlToolStripMenuItem.Text = ".xml";
-            // 
-            // csvToolStripMenuItem
-            // 
-            csvToolStripMenuItem.Name = "csvToolStripMenuItem";
-            csvToolStripMenuItem.Size = new Size(180, 22);
-            csvToolStripMenuItem.Text = ".csv";
-            // 
-            // dbToolStripMenuItem
-            // 
-            dbToolStripMenuItem.Name = "dbToolStripMenuItem";
-            dbToolStripMenuItem.Size = new Size(180, 22);
-            dbToolStripMenuItem.Text = ".db";
-            // 
-            // xlsxToolStripMenuItem
-            // 
-            xlsxToolStripMenuItem.Name = "xlsxToolStripMenuItem";
-            xlsxToolStripMenuItem.Size = new Size(180, 22);
-            xlsxToolStripMenuItem.Text = ".xlsx";
-            // 
-            // datToolStripMenuItem
-            // 
-            datToolStripMenuItem.Name = "datToolStripMenuItem";
-            datToolStripMenuItem.Size = new Size(180, 22);
-            datToolStripMenuItem.Text = ".dat";
             // 
             // Form1
             // 
@@ -268,7 +249,6 @@
         private ToolStripMenuItem fileToolStripMenuItem;
         private ToolStripMenuItem newToolStripMenuItem;
         private ToolStripMenuItem openToolStripMenuItem;
-        private ToolStripMenuItem saveToolStripMenuItem;
         private ToolStripMenuItem toolsToolStripMenuItem;
         private ToolStripMenuItem scanAndAppendToolStripMenuItem;
         private ToolStripMenuItem helpToolStripMenuItem;
@@ -278,8 +258,6 @@
         private ToolStripMenuItem jsonToolStripMenuItem;
         private ToolStripMenuItem xmlToolStripMenuItem;
         private ToolStripMenuItem csvToolStripMenuItem;
-        private ToolStripMenuItem dbToolStripMenuItem;
-        private ToolStripMenuItem xlsxToolStripMenuItem;
-        private ToolStripMenuItem datToolStripMenuItem;
+        private ColumnHeader driveColumnHeader;
     }
 }
