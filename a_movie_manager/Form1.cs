@@ -1,6 +1,7 @@
 using Microsoft.VisualBasic.FileIO;
 using System.Text.Json;
 using System.Windows.Forms;
+using System.Xml;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using static System.Windows.Forms.DataFormats;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
@@ -95,55 +96,96 @@ namespace a_movie_manager
                     }
                 }
             }
-            if (filePath.EndsWith(".json"))
+            if (filePath.EndsWith(".txt"))
             {
-                Movie m = new();
+                foreach(var f in fileContent.Split("\n"))
+                {
+                    Movie m = new()
+                    {
+                        Title = f.Split("@@")[0],
+                        Description = f.Split("@@")[1],
+                        Directors = f.Split("@@")[2].Split("##").ToList(),
+                        Year = int.Parse(f.Split("@@")[3]),
+                        Duration = int.Parse(f.Split("@@")[4]),
+                        Drive = char.Parse(f.Split("@@")[5])
+                    };
+                    mm.AddMovie(m);
+                }
+            }
+            else if (filePath.EndsWith(".json"))
+            {
                 JsonDocument jsonDoc = JsonDocument.Parse(fileContent);
                 JsonElement root = jsonDoc.RootElement;
-                m.Title = root.GetProperty("Title").ToString();
-                m.Description = root.GetProperty("Description").ToString();
-                m.Duration = int.Parse(root.GetProperty("Duration").ToString());
-                m.Drive = char.Parse(root.GetProperty("Drive").ToString());
-                m.Year = int.Parse(root.GetProperty("Year").ToString());
-                m.Directors = root.GetProperty("Directors").ToString().Split(",").ToList();
+                foreach (JsonProperty property in root.EnumerateObject())
+                {
+                    Movie m = new();
+                    JsonElement value = property.Value;
+                    m.Title = property.Name.ToString();
+                    m.Description = value.GetProperty("Description").ToString();
+                    m.Duration = int.Parse(value.GetProperty("Duration").ToString());
+                    m.Drive = char.Parse(value.GetProperty("Drive").ToString());
+                    m.Year = int.Parse(value.GetProperty("Year").ToString());
+                    m.Directors = value.GetProperty("Directors").ToString().Split(",").ToList();
+                    mm.AddMovie(m);
+                }
+                jsonDoc.Dispose();
+
             }
             else if (filePath.EndsWith(".xml"))
             {
-                Movie m = new();
+                XmlDocument doc = new XmlDocument();
+                doc.LoadXml(fileContent);
+                XmlNodeList movieNodes = doc.SelectNodes("//movie");
 
+                foreach (XmlNode movieNode in movieNodes)
+                {
+                    /*XmlAttribute idAttribute = movieNode.Attributes["id"];
+                    string movieId = idAttribute.Value;*/
+
+                    Movie m = new()
+                    {
+                        Title = movieNode.SelectSingleNode("Title").InnerText,
+                        Description = movieNode.SelectSingleNode("Description").InnerText,
+                        Directors = movieNode.SelectSingleNode("Directors").InnerText.Split(",").ToList(),
+                        Year = int.Parse(movieNode.SelectSingleNode("Year").InnerText),
+                        Duration = int.Parse(movieNode.SelectSingleNode("Duration").InnerText),
+                        Drive = char.Parse(movieNode.SelectSingleNode("Drive").InnerText)
+                    };
+                    mm.AddMovie(m);
+                }
             }
             else if (filePath.EndsWith(".csv"))
             {
-                Movie m = new();
                 using (TextFieldParser parser = new TextFieldParser(new StringReader(fileContent)))
                 {
                     parser.TextFieldType = FieldType.Delimited;
                     parser.SetDelimiters(",");
+                    parser.HasFieldsEnclosedInQuotes = true;
+
                     while (!parser.EndOfData)
                     {
                         string[] fields = parser.ReadFields();
-                        foreach (string field in fields)
-                        {
-                            MessageBox.Show(field);
-                        }
+                        Movie m = new();
+                        m.Title = fields[0];
+                        m.Description = fields[1];
+                        m.Directors = fields[2].Split('@').ToList();
+                        m.Year = int.Parse(fields[3]);
+                        m.Duration = int.Parse(fields[4]);
+                        m.Drive = char.Parse(fields[5]);
+                        mm.AddMovie(m);
                     }
                 }
             }
-            else if (filePath.EndsWith(".db"))
-            {
-
-            }
-            else if (filePath.EndsWith(".dat"))
-            {
-
-            }
-            //MessageBox.Show(fileContent, "File Content at path: " + filePath, MessageBoxButtons.OK);
+            updateListView();
+            MessageBox.Show("Succesfully opened");
         }
 
         private void scanAndAppendToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var folderPicker = new FolderBrowserDialog();
-            folderPicker.Description = "Select a folder";
+            var folderPicker = new FolderBrowserDialog
+            {
+                Description = "Select a folder"
+            };
             DialogResult result = folderPicker.ShowDialog();
 
             if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(folderPicker.SelectedPath))
@@ -185,9 +227,13 @@ namespace a_movie_manager
                     var line = "";
                     line += movie.Title+"@@";
                     line += movie.Description + "@@";
-                    foreach(var director in movie.Directors)
+                    if (movie.Directors.Count > 0)
                     {
-                        line += director + "##";
+                        foreach (var director in movie.Directors)
+                        {
+                            line += director + "##";
+                        }
+                        line = line.Substring(0, line.Length - 2);
                     }
                     line += "@@";
                     line += movie.Year.ToString() + "@@";
@@ -195,6 +241,7 @@ namespace a_movie_manager
                     line += movie.Drive.ToString() + "\n";
                     content += line;
                 }
+                content = content.Substring(0, content.Length - 1);
                 try
                 {
                     File.WriteAllText(fileName, content);
@@ -232,12 +279,12 @@ namespace a_movie_manager
                     line += "\"" + movie.Title + "\"" + ":{";
                     line += "\"Description\":\"" + movie.Description + "\",";
                     line += "\"Directors\":[";
-                    foreach (var director in movie.Directors)
-                    {
-                        line += "\""+director+ "\",";
-                    }
                     if (movie.Directors.Count>0)
                     {
+                        foreach (var director in movie.Directors)
+                        {
+                            line += "\"" + director + "\",";
+                        }
                         line = line.Substring(0, line.Length - 1);
                     }
                     line += "],";
@@ -286,12 +333,12 @@ namespace a_movie_manager
                     line += "<Title>" + movie.Title + "</Title>\n";
                     line += "<Description>" + movie.Description + "</Description>\n";
                     line += "<Directors>";
-                    foreach (var director in movie.Directors)
-                    {
-                        line += director + ",";
-                    }
                     if (movie.Directors.Count > 0)
                     {
+                        foreach (var director in movie.Directors)
+                        {
+                            line += director + ",";
+                        }
                         line = line.Substring(0, line.Length - 1);
                     }
                     line += "</Directors>\n";
@@ -338,12 +385,12 @@ namespace a_movie_manager
                     var line = "";
                     line += movie.Title + ",";
                     line += movie.Description + ",";
-                    foreach (var director in movie.Directors)
-                    {
-                        line += director + "@";
-                    }
                     if (movie.Directors.Count > 0)
                     {
+                        foreach (var director in movie.Directors)
+                        {
+                            line += director + "@";
+                        }
                         line = line.Substring(0, line.Length - 1);
                     }
                     line += ",";
