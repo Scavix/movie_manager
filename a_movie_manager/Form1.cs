@@ -36,6 +36,7 @@ namespace a_movie_manager
             if (form2.ShowDialog() == DialogResult.OK)
             {
                 Movie m = form2.GetMovie();
+                mm.RemoveMovieAt(listView.SelectedIndices[0]);
                 mm.AddMovie(m);
                 updateListView();
             }
@@ -93,6 +94,7 @@ namespace a_movie_manager
                     using (StreamReader reader = new StreamReader(fileStream))
                     {
                         fileContent = reader.ReadToEnd();
+                        mm.Clear();
                     }
                 }
             }
@@ -160,15 +162,15 @@ namespace a_movie_manager
                 {
                     parser.TextFieldType = FieldType.Delimited;
                     parser.SetDelimiters(",");
-                    parser.HasFieldsEnclosedInQuotes = true;
 
                     while (!parser.EndOfData)
                     {
-                        string[] fields = parser.ReadFields();
+                        string[] fields = parser.ReadLine().Split(",");
                         Movie m = new();
                         m.Title = fields[0];
-                        m.Description = fields[1];
+                        m.Description = fields[1].Replace("|",",");
                         m.Directors = fields[2].Split('@').ToList();
+                        MessageBox.Show(fields[3]);
                         m.Year = int.Parse(fields[3]);
                         m.Duration = int.Parse(fields[4]);
                         m.Drive = char.Parse(fields[5]);
@@ -379,12 +381,12 @@ namespace a_movie_manager
             if (result == DialogResult.OK)
             {
                 string fileName = sfd.FileName;
-                string content = "\"Title\",\"Description\",\"Directors\",\"Year\",\"Duration\",\"Drive\"\n";
+                string content = "";
                 foreach (var movie in mm.GetMovies())
                 {
                     var line = "";
                     line += movie.Title + ",";
-                    line += movie.Description + ",";
+                    line += movie.Description.Replace(",","|") + ",";
                     if (movie.Directors.Count > 0)
                     {
                         foreach (var director in movie.Directors)
