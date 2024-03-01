@@ -170,7 +170,6 @@ namespace a_movie_manager
                         m.Title = fields[0];
                         m.Description = fields[1].Replace("|",",");
                         m.Directors = fields[2].Split('@').ToList();
-                        MessageBox.Show(fields[3]);
                         m.Year = int.Parse(fields[3]);
                         m.Duration = int.Parse(fields[4]);
                         m.Drive = char.Parse(fields[5]);
