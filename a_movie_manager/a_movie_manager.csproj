@@ -12,6 +12,7 @@
     <PackageIcon>android-chrome-192x192.png</PackageIcon>
     <RepositoryUrl>https://github.com/Scavix/movie_manager.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
+    <StartupObject>a_movie_manager.Program</StartupObject>
   </PropertyGroup>
 
   <ItemGroup>
