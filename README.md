@@ -2,6 +2,8 @@
 
 Movie Manager is a C# application designed to help users organize and keep track locally of a personal movies collections. With this tool, a user can catalog movies and essential details like title, release year, director, and more to coming soon.
 
+![Movie_Manager_Capture](https://github.com/user-attachments/assets/ca172ea4-7d4b-4a32-9954-eecf4cfd8be5)
+
 ## Features:
 
 1. **Catalog Management**: Efficiently add, edit, and remove movies from your collection.
